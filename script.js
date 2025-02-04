@@ -1,64 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add status button click handlers
+    // Status selection
     document.querySelectorAll('.status-btn').forEach(button => {
         button.addEventListener('click', handleStatusSelection);
-    });
-
-    // Add trauma button click handlers
-    document.querySelectorAll('.cry-button').forEach(button => {
-        button.addEventListener('click', activateTraumaBot);
     });
 });
 
 function handleStatusSelection(event) {
     const status = event.currentTarget.dataset.status;
     const selector = document.querySelector('.status-selector');
+    const mainContent = document.querySelector('.main-content');
     
-    // Animate selector exit
+    // Animate out selector
     gsap.to(selector, {
         opacity: 0,
         duration: 0.8,
         onComplete: () => {
             selector.remove();
-            showContent(status);
+            // Show main content
+            mainContent.classList.add('active');
+            // Show specific content section
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelector(`.${status}-content`).classList.add('active');
+            // Add event listeners for trauma buttons
+            document.querySelectorAll('.cry-button').forEach(btn => {
+                btn.addEventListener('click', activateTraumaBot);
+            });
+            // Animate content
+            gsap.from(`.${status}-content`, {
+                duration: 1,
+                opacity: 0,
+                y: 50,
+                ease: "power4.out"
+            });
+            gsap.from('.grid-item', {
+                duration: 0.8,
+                y: 100,
+                opacity: 0,
+                stagger: 0.15,
+                ease: "back.out(1.7)",
+                delay: 0.3
+            });
         }
     });
 }
 
-function showContent(status) {
-    const mainContent = document.querySelector('.main-content');
-    const contentSection = document.querySelector(`.${status}-content`);
-    
-    // Show main content
-    mainContent.classList.add('active');
-    contentSection.classList.remove('hidden');
-
-    // Animate content entrance
-    gsap.from(contentSection, {
-        duration: 1,
-        opacity: 0,
-        y: 50,
-        ease: "power4.out"
-    });
-
-    // Animate grid items
-    gsap.from('.grid-item', {
-        duration: 0.8,
-        y: 100,
-        opacity: 0,
-        stagger: 0.15,
-        ease: "back.out(1.7)",
-        delay: 0.3
-    });
-
-    // Set background
-    document.body.style.background = status === 'single' 
-        ? 'linear-gradient(45deg, #2a2a2a, #1a1a1a)'
-        : 'linear-gradient(45deg, #4a0000, #2a0000)';
-}
-
 function activateTraumaBot() {
-    const traumaMessages = {
+    const status = document.querySelector('.content-section.active').classList[1].replace('-content', '');
+    const messages = {
         single: [
             "😭 Last date: Sometime during the Obama administration",
             "💔 97% of your texts are to Uber Eats",
@@ -73,12 +63,8 @@ function activateTraumaBot() {
         ]
     };
 
-    const status = document.querySelector('.content-section:not(.hidden)').classList[1].replace('-content', '');
-    const messages = traumaMessages[status];
-    
-    // Create trauma bot element
     const traumaBot = document.createElement('div');
-    traumaBot.className = 'trauma-bot';
+    traumaBot.id = 'trauma-bot';
     traumaBot.innerHTML = `
         <div class="bot-header">
             <h3>💔 Trauma Bot 3000</h3>
@@ -86,22 +72,25 @@ function activateTraumaBot() {
         </div>
         <div class="bot-content">
             <ul>
-                ${messages.map(msg => `<li>${msg}</li>`).join('')}
+                ${messages[status].map(msg => `<li>${msg}</li>`).join('')}
             </ul>
         </div>
     `;
 
-    // Add close functionality
     traumaBot.querySelector('.close-btn').addEventListener('click', () => {
-        traumaBot.remove();
+        gsap.to(traumaBot, {
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            onComplete: () => traumaBot.remove()
+        });
     });
 
-    // Add to page and animate
     document.body.appendChild(traumaBot);
-    gsap.from(traumaBot, {
+    gsap.to(traumaBot, {
+        opacity: 1,
+        y: 0,
         duration: 0.5,
-        y: 100,
-        opacity: 0,
         ease: "power2.out"
     });
 }
