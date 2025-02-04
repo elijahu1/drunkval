@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Status selection
     document.querySelectorAll('.status-btn').forEach(button => {
         button.addEventListener('click', handleStatusSelection);
     });
@@ -9,6 +8,10 @@ function handleStatusSelection(event) {
     const status = event.currentTarget.dataset.status;
     const selector = document.querySelector('.status-selector');
     const mainContent = document.querySelector('.main-content');
+    const contentSection = document.querySelector(`.${status}-content`);
+
+    // Show main content immediately
+    mainContent.classList.remove('hidden');
     
     // Animate out selector
     gsap.to(selector, {
@@ -16,50 +19,57 @@ function handleStatusSelection(event) {
         duration: 0.8,
         onComplete: () => {
             selector.remove();
-            // Show main content
-            mainContent.classList.add('active');
-            // Show specific content section
+            
+            // Show selected content section
             document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
+                section.classList.add('hidden');
             });
-            document.querySelector(`.${status}-content`).classList.add('active');
-            // Add event listeners for trauma buttons
-            document.querySelectorAll('.cry-button').forEach(btn => {
-                btn.addEventListener('click', activateTraumaBot);
-            });
-            // Animate content
-            gsap.from(`.${status}-content`, {
+            contentSection.classList.remove('hidden');
+            
+            // Animate content entrance
+            gsap.to(mainContent, {
+                opacity: 1,
                 duration: 1,
-                opacity: 0,
-                y: 50,
                 ease: "power4.out"
             });
-            gsap.from('.grid-item', {
+            
+            gsap.from(contentSection, {
+                y: 50,
+                opacity: 0,
                 duration: 0.8,
+                ease: "back.out(1.7)"
+            });
+
+            gsap.from('.grid-item', {
                 y: 100,
                 opacity: 0,
                 stagger: 0.15,
-                ease: "back.out(1.7)",
+                duration: 0.8,
                 delay: 0.3
             });
+
+            // Add trauma button listener
+            document.querySelector('.cry-button').addEventListener('click', activateTraumaBot);
         }
     });
 }
 
 function activateTraumaBot() {
-    const status = document.querySelector('.content-section.active').classList[1].replace('-content', '');
+    const activeSection = document.querySelector('.content-section:not(.hidden)');
+    const status = activeSection.classList.contains('single-content') ? 'single' : 'situationship';
+    
     const messages = {
         single: [
-            "😭 Last date: Sometime during the Obama administration",
-            "💔 97% of your texts are to Uber Eats",
-            "🍷 Wine > dates this month: 8-0",
-            "📸 Most photos: Cat/Dog/Memes"
+            "😭 Last date: Before TikTok existed",
+            "💌 Most recent text: 'Your Uber Eats is here'",
+            "🍷 Nights out vs. nights in: 0-31",
+            "📸 Gallery: 87% memes, 13% cat"
         ],
         situationship: [
-            "🔥 Last 'I love you': ???",
-            "💌 Unanswered texts: 14 and counting",
-            "⏳ Days since intimacy: Could be 27, could be 37...",
-            "💔 Mutual delusion level: 98%"
+            "🔥 Last 'I love you': Never existed",
+            "💬 Unanswered texts: Stacking up",
+            "⌛ Days since clarity: ∞",
+            "💔 Mutual confusion level: 110%"
         ]
     };
 
@@ -87,9 +97,9 @@ function activateTraumaBot() {
     });
 
     document.body.appendChild(traumaBot);
-    gsap.to(traumaBot, {
-        opacity: 1,
-        y: 0,
+    gsap.from(traumaBot, {
+        opacity: 0,
+        y: 100,
         duration: 0.5,
         ease: "power2.out"
     });
