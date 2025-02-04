@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize status buttons
+    // Status button handlers
     document.querySelectorAll('.status-btn').forEach(button => {
         button.addEventListener('click', handleStatusSelection);
     });
 
-    // Mobile viewport height fix
+    // Mobile viewport fix
     const setVH = () => {
-        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
     setVH();
     window.addEventListener('resize', setVH);
@@ -16,26 +17,25 @@ function handleStatusSelection(event) {
     const status = event.currentTarget.dataset.status;
     const selector = document.querySelector('.status-selector');
     const mainContent = document.querySelector('.main-content');
-    const contentSections = document.querySelectorAll('.content-section');
 
-    // Hide all content sections
-    contentSections.forEach(section => section.classList.remove('active'));
-
-    // Animate selector out
+    // Show main content immediately
+    mainContent.classList.remove('hidden');
+    
+    // Animate out selector
     gsap.to(selector, {
         opacity: 0,
         duration: 0.8,
         onComplete: () => {
             selector.remove();
             
-            // Show main content
-            mainContent.classList.add('active');
-            
             // Show selected content
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
             const activeSection = document.querySelector(`.${status}-content`);
-            activeSection.classList.add('active');
+            activeSection.classList.remove('hidden');
 
-            // Animate content in
+            // Animate content
             gsap.from(activeSection, {
                 y: 50,
                 opacity: 0,
@@ -43,24 +43,17 @@ function handleStatusSelection(event) {
                 ease: "back.out(1.7)"
             });
 
-            // Animate grid items
-            gsap.from('.grid-item', {
-                y: 100,
-                opacity: 0,
-                stagger: 0.1,
-                duration: 0.6,
-                delay: 0.3
-            });
-
             // Add trauma button listener
-            document.querySelector('.cry-button').addEventListener('click', activateTraumaBot);
+            const cryButton = activeSection.querySelector('.cry-button');
+            cryButton.addEventListener('click', activateTraumaBot);
         }
     });
 }
 
 function activateTraumaBot() {
-    const status = document.querySelector('.content-section.active').classList.contains('single-content') ? 'single' : 'situationship';
+    const status = document.querySelector('.content-section:not(.hidden)').classList.contains('single-content') ? 'single' : 'situationship';
     
+    // Trauma messages
     const messages = {
         single: [
             "😭 Last date: Before TikTok existed",
@@ -76,7 +69,36 @@ function activateTraumaBot() {
         ]
     };
 
-    const traumaBot = document.getElementById('trauma-bot');
+    // Create trauma bot
+    const traumaBot = document.createElement('div');
+    traumaBot.id = 'trauma-bot';
     traumaBot.innerHTML = `
         <div class="bot-header">
-            <h3
+            <h3>💔 Trauma Bot 3000</h3>
+            <button class="close-btn">×</button>
+        </div>
+        <div class="bot-content">
+            <ul>
+                ${messages[status].map(msg => `<li>${msg}</li>`).join('')}
+            </ul>
+        </div>
+    `;
+
+    // Add close functionality
+    traumaBot.querySelector('.close-btn').addEventListener('click', () => {
+        gsap.to(traumaBot, {
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            onComplete: () => traumaBot.remove()
+        });
+    });
+
+    document.body.appendChild(traumaBot);
+    gsap.from(traumaBot, {
+        opacity: 0,
+        y: 100,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+}
