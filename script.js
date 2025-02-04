@@ -1,50 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize status buttons
     document.querySelectorAll('.status-btn').forEach(button => {
         button.addEventListener('click', handleStatusSelection);
     });
+
+    // Mobile viewport height fix
+    const setVH = () => {
+        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    setVH();
+    window.addEventListener('resize', setVH);
 });
 
 function handleStatusSelection(event) {
     const status = event.currentTarget.dataset.status;
     const selector = document.querySelector('.status-selector');
     const mainContent = document.querySelector('.main-content');
-    const contentSection = document.querySelector(`.${status}-content`);
+    const contentSections = document.querySelectorAll('.content-section');
 
-    // Show main content immediately
-    mainContent.classList.remove('hidden');
-    
-    // Animate out selector
+    // Hide all content sections
+    contentSections.forEach(section => section.classList.remove('active'));
+
+    // Animate selector out
     gsap.to(selector, {
         opacity: 0,
         duration: 0.8,
         onComplete: () => {
             selector.remove();
             
-            // Show selected content section
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.add('hidden');
-            });
-            contentSection.classList.remove('hidden');
+            // Show main content
+            mainContent.classList.add('active');
             
-            // Animate content entrance
-            gsap.to(mainContent, {
-                opacity: 1,
-                duration: 1,
-                ease: "power4.out"
-            });
-            
-            gsap.from(contentSection, {
+            // Show selected content
+            const activeSection = document.querySelector(`.${status}-content`);
+            activeSection.classList.add('active');
+
+            // Animate content in
+            gsap.from(activeSection, {
                 y: 50,
                 opacity: 0,
                 duration: 0.8,
                 ease: "back.out(1.7)"
             });
 
+            // Animate grid items
             gsap.from('.grid-item', {
                 y: 100,
                 opacity: 0,
-                stagger: 0.15,
-                duration: 0.8,
+                stagger: 0.1,
+                duration: 0.6,
                 delay: 0.3
             });
 
@@ -55,8 +59,7 @@ function handleStatusSelection(event) {
 }
 
 function activateTraumaBot() {
-    const activeSection = document.querySelector('.content-section:not(.hidden)');
-    const status = activeSection.classList.contains('single-content') ? 'single' : 'situationship';
+    const status = document.querySelector('.content-section.active').classList.contains('single-content') ? 'single' : 'situationship';
     
     const messages = {
         single: [
@@ -73,34 +76,7 @@ function activateTraumaBot() {
         ]
     };
 
-    const traumaBot = document.createElement('div');
-    traumaBot.id = 'trauma-bot';
+    const traumaBot = document.getElementById('trauma-bot');
     traumaBot.innerHTML = `
         <div class="bot-header">
-            <h3>💔 Trauma Bot 3000</h3>
-            <button class="close-btn">×</button>
-        </div>
-        <div class="bot-content">
-            <ul>
-                ${messages[status].map(msg => `<li>${msg}</li>`).join('')}
-            </ul>
-        </div>
-    `;
-
-    traumaBot.querySelector('.close-btn').addEventListener('click', () => {
-        gsap.to(traumaBot, {
-            opacity: 0,
-            y: 20,
-            duration: 0.3,
-            onComplete: () => traumaBot.remove()
-        });
-    });
-
-    document.body.appendChild(traumaBot);
-    gsap.from(traumaBot, {
-        opacity: 0,
-        y: 100,
-        duration: 0.5,
-        ease: "power2.out"
-    });
-}
+            <h3
