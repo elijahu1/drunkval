@@ -11,78 +11,82 @@
     <div class="status-selector">
         <div class="selector-content">
             <h1 class="pulse">How Fucked Are You?</h1>
-            <!-- Update the selector buttons -->
-<div class="selector-buttons">
-    <button class="status-btn single" data-status="single">
-        <div class="icon-container">
-            <img src="https://img.icons8.com/emoji/96/broken-heart.png" 
-                 alt="Single" 
-                 class="status-icon">
-        </div>
-        <span class="status-label">Single AF</span>
-    </button>
-    
-    <button class="status-btn situationship" data-status="situationship">
-        <div class="icon-container">
-            <img src="https://img.icons8.com/emoji/96/confused-face.png" 
-                 alt="Situationship" 
-                 class="status-icon">
-        </div>
-        <span class="status-label">Situationship Hell</span>
-    </button>
-</div>
+            <div class="selector-buttons">
+                <button class="status-btn single" data-status="single">
+                    <div class="icon-container">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAACdUlEQVR4nO2bwU7CQBCGZ0sLvIAnX8CbJx/Ak0/gxZP6BF58AU8+gSdfwJMnE2NijDEkJiZqYozRGGNijDExxpgYY0yMMSbGmH7pdpdtu7ttd7ttO/BP2q47M/3Y6XZ2BgAAAAAAAAAAAAAAAAAAAAAAAMB/Z9Q0zXHTNOdN0zy1jHr2aJrmommaU0TMA4UfI+Km0+lsIqJvMfS8p/0F7S+UQ4DCXxPRY9sFhCaiK9pflEOAwl+WLSAwES2VQ4DCX5QtgIiWyyFA4S/KFkBEy+UQoPAXZQsgouVyCFD4i7IFENFyOQQo/EXZAohouRwCFP6ibAFEtFwOAQp/UbYAIlouhwCFvyhbABEtl0OAwl+ULYCIlsshQOEv5i0gS7JkKQR0u92jEAJ6vd5hCAH9fv8ghIDBYLAfQsBwONwLIWA0Gu2GEDAej3dCCJhMJtshBEyn060QAqbT6WYIAbPZbCOEgNlsth5CwHw+XwshYLFYrIUQ8PHxsRpCwOfn50oIAd/f3yshBPz8/KyEEPD7+7scQsDf399SCAHOAojohIhOEHEVEdcQcR0RNxBxExG3EHEbEXcQcRcR9xBxHxEPEPEQEY8Q8RgRTxDxFBHPEPEcES8Q8RIRrxDxGhFvEPEWEe8Q8R4RHxDxEREfEfEJEZ8R8QURXxHxDRHfEfEDET8R8QsRvxHxBxF/EfEPEV0MAAAAAAAAAAAAAAAAAAAAAABQOP4B53jMO+Dzut0AAAAASUVORK5CYII=" 
+                             alt="Single" 
+                             class="status-icon">
+                    </div>
+                    <span class="status-label">Single AF</span>
+                </button>
+                
+                <button class="status-btn situationship" data-status="situationship">
+                    <div class="icon-container">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAACoklEQVR4nO2bS0sCURjGZ2wj6DNoF0HrVn0C6RNEmz5B0KZPEH2CqE0QbYJoE0SbIGgTRJsgaBNEmyDaBNEmiDaPv8MzMDrO3DNzZ+acB/7wL+acd37nPW8BAAAAAAAAAAAAAAAAAAAAAAAw7qTT6YVcLreaz+d3CoXCYbFYPCkWi2fFYvG8WCxeFovFq2KxeF0sFm+KxeJtsVi8KxaL98Vi8aFYLD4Wi8WnYrH4XCwWX4rF4muxWHwrFovvxWLxo1gsfhaLxa9isfhdLJZ+i6XyX6lU/isDAAAAAAAAAAAAAAAAAAAAAABjTCaTWc7lcuv5fH6rUCjsF4vFo2KxeFIsFs+LxeJlsVi8KRaLLWOxeFcsFu+LxeJDsVh8LBaLL8Vi8bVYLL4Xi8WPYrH4WSyWvkrA9w8AAAAAAAAAAAAAAAAAAAAAAGB8SSQSi5lMZi2Xy23m8/ndQqFwUCwWj4vF4mmxWDwvFouXxWLxulgs3hSLxbtisXhfLBYfi8XiU7FYfC4Wiy/FYvG1WCy+FYvF92Kx+FEslj5LwM8PAAAAAAAAAAAAAAAAAAAAAACAMSWdTi9nMpm1XC63lc/ndwqFwkGhUDgqFounxWLxrFgsXhSLxatisXhTLBbvEONDsVh8LBaLT8Vi8blYLL4Ui8XXYrH4ViwW34vF4kcJ+P0DAAAAAAAAAAAAAAAAAAAAAABgTEmlUkuZTGY1m81u5PP57UKhsF8oFI4KheJxoVA8LRSKF4VC8bJQKF4XCsWbQqF4WygU7wqF4n2hUHwoFIqPhULxqVAoPheKxZdCofhaKBTfC4XiR6FQ/CwBv38AAAAAAAAAAAAAAAAAAAAAAACMKalUajGTyaxks9n1fD6/VSgU9gqFwmGhUDwuFIqnhULxvFAoXhYKxatCoXhTKBRvC4XiXaFQvC8Uig+FQvGxUCg+FYrF50Kx+FIoFN8KheJ7oVD8KAG/fwAAAAAAAAAAAAAAAAAAAAAAAIwpqVRqIZPJLGez2bVcLreZz+d3CoXCfqFQOCwUiseFQvG0UCheFArFq0KheFMoFG8LheJdoVC8LxSKD4VC8bFQLD4VisXnQrH4UigU3wqF4nuhUPwoAb9/AAAAAAAAAAAAAAAAAAAAAAAAjCn/AFlMO+ANN8rZAAAAAElFTkSuQmCC" 
+                             alt="Situationship" 
+                             class="status-icon">
+                    </div>
+                    <span class="status-label">Situationship Hell</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content hidden">
         <!-- Single AF Content -->
-        <div class="content-section single-content">
+        <div class="content-section single-content hidden">
             <div class="hero">
                 <h2 class="title-slide">Welcome to Your <span class="highlight">Pathetic</span> Single Life</h2>
                 <div class="image-grid">
                     <div class="grid-item">
-                        <img src="https://source.unsplash.com/random/600x600?lonely" alt="Alone" class="hover-zoom">
+                        <img src="https://placehold.co/600x600/ff0066/white?text=Netflix+%26+Alone" 
+                             alt="Alone" 
+                             class="hover-zoom">
                         <div class="overlay">You Tonight</div>
                     </div>
                     <div class="grid-item">
-                        <img src="https://source.unsplash.com/random/600x600?cat" alt="Pet" class="hover-zoom">
+                        <img src="https://placehold.co/600x600/ff1493/white?text=Cat+Valentine" 
+                             alt="Pet" 
+                             class="hover-zoom">
                         <div class="overlay">Your Actual Valentine</div>
                     </div>
                 </div>
             </div>
             
-            <button class="cry-button spin" onclick="activateTraumaBot()">
+            <button class="cry-button spin">
                 <span>🖤 Enable Emotional Damage</span>
             </button>
         </div>
 
         <!-- Situationship Content -->
-        <div class="content-section situationship-content">
+        <div class="content-section situationship-content hidden">
             <div class="hero">
                 <h2 class="title-slide">The <span class="highlight">"It's Complicated"</span> Experience</h2>
                 <div class="image-grid">
                     <div class="grid-item">
-                        <img src="https://source.unsplash.com/random/600x600?argument" alt="Fight" class="hover-zoom">
-                        <div class="overlay">Your Last Text Exchange</div>
+                        <img src="https://placehold.co/600x600/d10047/white?text=Last+Text" 
+                             alt="Fight" 
+                             class="hover-zoom">
+                        <div class="overlay">Your Last Conversation</div>
                     </div>
                     <div class="grid-item">
-                        <img src="https://source.unsplash.com/random/600x600?clock" alt="Waiting" class="hover-zoom">
-                        <div class="overlay">You Waiting for a Text Back</div>
+                        <img src="https://placehold.co/600x600/ff69b4/white?text=Waiting..." 
+                             alt="Waiting" 
+                             class="hover-zoom">
+                        <div class="overlay">You Right Now</div>
                     </div>
                 </div>
             </div>
             
-            <button class="cry-button spin" onclick="activateTraumaBot()">
+            <button class="cry-button spin">
                 <span>💔 Activate Relationship Autopsy</span>
             </button>
         </div>
-
-        <!-- Trauma Bot -->
-        <div id="trauma-bot" class="hidden"></div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
