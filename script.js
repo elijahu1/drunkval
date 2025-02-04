@@ -1,40 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    createHearts();
-    document.querySelector('.love-letter').addEventListener('click', revealLetter);
-});
-
-function createHearts() {
-    const heartsContainer = document.querySelector('.hearts');
-    for (let i = 0; i < 50; i++) {
-        const heart = document.createElement('div');
-        heart.innerHTML = '💖';
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDelay = Math.random() * 5 + 's';
-        heartsContainer.appendChild(heart);
-    }
-}
-
-function revealLetter() {
-    const letter = document.getElementById('letter');
-    letter.classList.toggle('hidden');
-}
-
-function explodeHearts() {
-    for (let i = 0; i < 100; i++) {
-        const heart = document.createElement('div');
-        heart.innerHTML = '💥';
-        heart.style.position = 'absolute';
-        heart.style.left = Math.random() * window.innerWidth + 'px';
-        heart.style.top = Math.random() * window.innerHeight + 'px';
-        heart.style.fontSize = Math.random() * 30 + 20 + 'px';
-        heart.style.animation = `explode ${Math.random() * 0.5 + 0.5}s ease-out`;
-        document.body.appendChild(heart);
-        
-        setTimeout(() => heart.remove(), 1000);
-    }
-}
-
 // Add drunk effect to text
 document.querySelectorAll('h1, p').forEach(element => {
     element.addEventListener('mousemove', () => {
@@ -102,4 +65,82 @@ function uglyCry() {
         repeat: 1,
         yoyo: true
     });
+}
+
+// Add chatbot functionality
+function uglyCry() {
+    // Clear previous chat
+    const existingChat = document.getElementById('depression-bot');
+    if (existingChat) existingChat.remove();
+
+    // Create chat container
+    const chat = document.createElement('div');
+    chat.id = 'depression-bot';
+    chat.innerHTML = `
+        <div class="chat-header">
+            <span>🤖 DepressionBot 3000</span>
+            <button class="close-btn" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+        <div class="chat-messages"></div>
+    `;
+    document.body.appendChild(chat);
+
+    // Start conversation
+    addBotMessage("Hey lonely human, let's simulate those feelings you can't get irl:", 1000);
+    addBotMessage("On a scale of 1 to 'fuck my life', how pathetic is your Valentine's Day?", 2000);
+    
+    // Add typing indicator
+    let isTyping = false;
+    setInterval(() => {
+        if (!isTyping && Math.random() < 0.3) {
+            simulateTyping();
+        }
+    }, 5000);
+}
+
+// Chat message templates
+const botResponses = [
+    {
+        triggers: ['1', 'not bad'],
+        message: "Bullshit. I can see your Instagram stories. Pathetic.",
+        replies: [
+            { text: "😭 You're right", next: 4 },
+            { text: "🖕 Fuck you", next: 5 }
+        ]
+    },
+    {
+        triggers: ['fuck my life'],
+        message: "Finally some honesty! Let's wallow in mutual despair:",
+        replies: [
+            { text: "Cry together", next: 6 },
+            { text: "Delete dating apps", next: 7 }
+        ]
+    }
+];
+
+function addBotMessage(text, delay = 0) {
+    setTimeout(() => {
+        const messages = document.querySelector('.chat-messages');
+        const msg = document.createElement('div');
+        msg.className = 'bot-msg';
+        msg.innerHTML = `
+            <div class="bubble">${text}</div>
+            <div class="typing"></div>
+        `;
+        messages.appendChild(msg);
+        msg.scrollIntoView();
+    }, delay);
+}
+
+function simulateTyping() {
+    isTyping = true;
+    const typing = document.createElement('div');
+    typing.className = 'typing';
+    document.querySelector('.chat-messages').appendChild(typing);
+    
+    setTimeout(() => {
+        typing.remove();
+        addBotMessage("Still there? Of course you are. Who else would talk to you?", 500);
+        isTyping = false;
+    }, 2000);
 }
