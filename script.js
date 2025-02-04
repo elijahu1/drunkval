@@ -1,4 +1,4 @@
-// Add drunk effect to text
+
 document.querySelectorAll('h1, p').forEach(element => {
     element.addEventListener('mousemove', () => {
         element.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
@@ -67,7 +67,7 @@ function uglyCry() {
     });
 }
 
-// Add chatbot functionality
+// chatbot functionality
 function uglyCry() {
     // Clear previous chat
     const existingChat = document.getElementById('depression-bot');
@@ -89,7 +89,7 @@ function uglyCry() {
     addBotMessage("Hey lonely human, let's simulate those feelings you can't get irl:", 1000);
     addBotMessage("On a scale of 1 to 'fuck my life', how pathetic is your Valentine's Day?", 2000);
     
-    // Add typing indicator
+    
     let isTyping = false;
     setInterval(() => {
         if (!isTyping && Math.random() < 0.3) {
@@ -98,7 +98,7 @@ function uglyCry() {
     }, 5000);
 }
 
-// Chat message templates
+// Chat message shit
 const botResponses = [
     {
         triggers: ['1', 'not bad'],
@@ -144,3 +144,54 @@ function simulateTyping() {
         isTyping = false;
     }, 2000);
 }
+
+// Status Selection
+function selectStatus(status) {
+    const selector = document.querySelector('.status-selector');
+    const mainContent = document.querySelector('.main-content');
+    
+    // Animate out selector
+    gsap.to(selector, {
+        opacity: 0,
+        duration: 0.5,
+        onComplete: () => selector.remove()
+    });
+    
+    // Animate in main content
+    mainContent.classList.remove('hidden');
+    gsap.to(mainContent, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power4.out"
+    });
+    
+    // Add status-specific content
+    if(status === 'single') {
+        document.body.classList.add('single-mode');
+        // Add single-shaming content
+    } else {
+        document.body.classList.add('coupled-mode'); 
+        // Add couple-specific animations
+    }
+    
+    // Animate grid items
+    gsap.to(".grid-item", {
+        scale: 1,
+        opacity: 1,
+        stagger: 0.1,
+        delay: 0.5,
+        ease: "back.out(1.7)"
+    });
+}
+
+// Add floating images animation
+document.querySelectorAll('.grid-item').forEach(item => {
+    gsap.to(item, {
+        y: () => Math.random() * 20 - 10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+    });
+});

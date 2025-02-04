@@ -200,3 +200,126 @@ body {
     33% { content: '..'; }
     66% { content: '...'; }
 }
+
+/* Status Selector */
+.status-selector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #ff0066;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+}
+
+.selector-content {
+    text-align: center;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: selectorEntrance 1s ease forwards 0.5s;
+}
+
+@keyframes selectorEntrance {
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.selector-buttons {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.status-btn {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid white;
+    padding: 2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 250px;
+    backdrop-filter: blur(5px);
+}
+
+.status-btn:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.2);
+}
+
+.heart-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+}
+
+.broken-heart, .whole-heart {
+    fill: white;
+    width: 100%;
+    height: 100%;
+    animation: heartPulse 2s ease infinite;
+}
+
+.broken-heart path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawHeart 3s ease forwards;
+}
+
+@keyframes drawHeart {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Linktree-style Animations */
+.main-content {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s ease;
+}
+
+.main-content.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Image Grid Animation */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.grid-item.animate {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: 0.3s ease;
+}
+
+.grid-item:hover img {
+    transform: scale(1.1);
+}

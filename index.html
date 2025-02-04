@@ -7,6 +7,35 @@
     <link rel="stylesheet" href="makeup.css">
 </head>
 <body>
+
+    <!-- Relationship Selector -->
+    <div class="status-selector">
+        <div class="selector-content">
+            <h2>Are you currently...</h2>
+            <div class="selector-buttons">
+                <button class="status-btn single" onclick="selectStatus('single')">
+                    <div class="heart-container">
+                        <svg class="broken-heart" viewBox="0 0 32 29.6">
+                            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z M10,11H8v8h2V11z M16,19h-2v-8h2V19z M24,11h-2v8h2V11z"/>
+                        </svg>
+                    </div>
+                    <span>Single AF</span>
+                </button>
+                <button class="status-btn coupled" onclick="selectStatus('coupled')">
+                    <div class="heart-container">
+                        <svg class="whole-heart" viewBox="0 0 32 29.6">
+                            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+                        </svg>
+                    </div>
+                    <span>In a Situationship</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
     <div class="scroll-container">
         <section class="act opening" data-bg="#ff0066">
             <div class="content">
