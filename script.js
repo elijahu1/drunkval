@@ -41,3 +41,65 @@ document.querySelectorAll('h1, p').forEach(element => {
         element.style.transform = `rotate(${Math.random() * 4 - 2}deg)`;
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.act');
+    const audio = document.getElementById('audio');
+    
+    // Animate sections on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('active');
+                document.body.style.background = entry.target.dataset.bg;
+            }
+        });
+    }, { threshold: 0.5 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Horizontal fight animation
+    gsap.to('.text-bubble', {
+        x: () => Math.random() * 100 - 50,
+        y: () => Math.random() * 50 - 25,
+        duration: 2,
+        repeat: -1,
+        yoyo: true
+    });
+
+    // Ring animation
+    gsap.from('.ring', {
+        scale: 0,
+        rotation: 720,
+        duration: 3,
+        ease: "elastic.out(1, 0.5)"
+    });
+});
+
+function uglyCry() {
+    const tears = document.createElement('div');
+    tears.innerHTML = '😭'.repeat(50);
+    tears.style.position = 'fixed';
+    tears.style.fontSize = '2rem';
+    tears.style.animation = 'cry-fall 2s linear';
+    document.body.appendChild(tears);
+
+    // Randomize tear positions
+    Array.from(tears.children).forEach(tear => {
+        tear.style.left = Math.random() * 100 + 'vw';
+        gsap.to(tear, {
+            y: window.innerHeight,
+            rotation: Math.random() * 360,
+            duration: 2,
+            onComplete: () => tear.remove()
+        });
+    });
+
+    // Make everything blurry
+    gsap.to('body', {
+        backdropFilter: 'blur(10px)',
+        duration: 1,
+        repeat: 1,
+        yoyo: true
+    });
+}
