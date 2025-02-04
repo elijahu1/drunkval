@@ -1,3 +1,66 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Add event listeners properly
+    document.querySelectorAll('.status-btn').forEach(button => {
+        button.addEventListener('click', handleStatusSelection);
+    });
+});
+
+function handleStatusSelection(e) {
+    const status = e.currentTarget.dataset.status;
+    const selector = document.querySelector('.status-selector');
+    const mainContent = document.querySelector('.main-content');
+    
+    // Animate selector exit
+    gsap.to(selector, {
+        opacity: 0,
+        duration: 0.8,
+        onComplete: () => {
+            selector.remove();
+            showRelevantContent(status);
+        }
+    });
+}
+
+function showRelevantContent(status) {
+    const mainContent = document.querySelector('.main-content');
+    const contentSection = document.querySelector(`.${status}-content`);
+    
+    // Show main content
+    mainContent.classList.remove('hidden');
+    
+    // Show specific content section
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.add('hidden');
+    });
+    contentSection.classList.remove('hidden');
+    
+    // Animate content entrance
+    gsap.from(contentSection, {
+        duration: 1,
+        opacity: 0,
+        y: 50,
+        ease: "power4.out"
+    });
+    
+    // Animate grid items
+    gsap.from('.grid-item', {
+        duration: 0.8,
+        y: 100,
+        opacity: 0,
+        stagger: 0.15,
+        ease: "back.out(1.7)",
+        delay: 0.3
+    });
+    
+    // Set background
+    document.body.style.background = status === 'single' 
+        ? 'linear-gradient(45deg, #2a2a2a, #1a1a1a)'
+        : 'linear-gradient(45deg, #4a0000, #2a0000)';
+}
+
+// Rest of your existing trauma bot code...
+
+
 let currentStatus = null;
 
 function selectStatus(status) {

@@ -159,3 +159,30 @@ body {
     transform: translateY(0);
     opacity: 1;
 }
+
+/* Fix clickable areas */
+.status-btn {
+    position: relative;
+    overflow: visible;
+    cursor: pointer !important;
+}
+
+.status-icon {
+    pointer-events: none; /* Allow clicks through image */
+}
+
+/* Ensure click targets */
+.selector-buttons {
+    position: relative;
+    z-index: 1001;
+}
+
+/* Fix hidden content */
+.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+.main-content {
+    display: block;
+}

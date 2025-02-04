@@ -11,21 +11,26 @@
     <div class="status-selector">
         <div class="selector-content">
             <h1 class="pulse">How Fucked Are You?</h1>
-            <div class="selector-buttons">
-                <button class="status-btn single" onclick="selectStatus('single')">
-                    <div class="icon-container">
-                        <img src="https://img.icons8.com/emoji/96/broken-heart.png" alt="Single" class="status-icon">
-                    </div>
-                    <span class="status-label">Single AF</span>
-                </button>
-                
-                <button class="status-btn situationship" onclick="selectStatus('situationship')">
-                    <div class="icon-container">
-                        <img src="https://img.icons8.com/emoji/96/confused-face.png" alt="Situationship" class="status-icon">
-                    </div>
-                    <span class="status-label">Situationship Hell</span>
-                </button>
-            </div>
+            <!-- Update the selector buttons -->
+<div class="selector-buttons">
+    <button class="status-btn single" data-status="single">
+        <div class="icon-container">
+            <img src="https://img.icons8.com/emoji/96/broken-heart.png" 
+                 alt="Single" 
+                 class="status-icon">
+        </div>
+        <span class="status-label">Single AF</span>
+    </button>
+    
+    <button class="status-btn situationship" data-status="situationship">
+        <div class="icon-container">
+            <img src="https://img.icons8.com/emoji/96/confused-face.png" 
+                 alt="Situationship" 
+                 class="status-icon">
+        </div>
+        <span class="status-label">Situationship Hell</span>
+    </button>
+</div>
         </div>
     </div>
 
