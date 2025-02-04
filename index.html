@@ -3,79 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuckin' Love Odyssey</title>
+    <title>Love Trauma Simulator 2024</title>
     <link rel="stylesheet" href="makeup.css">
 </head>
 <body>
-
-    <!-- Relationship Selector -->
+    <!-- Status Selector -->
     <div class="status-selector">
         <div class="selector-content">
-            <h2>Are you currently...</h2>
+            <h1 class="pulse">How Fucked Are You?</h1>
             <div class="selector-buttons">
                 <button class="status-btn single" onclick="selectStatus('single')">
-                    <div class="heart-container">
-                        <svg class="broken-heart" viewBox="0 0 32 29.6">
-                            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z M10,11H8v8h2V11z M16,19h-2v-8h2V19z M24,11h-2v8h2V11z"/>
-                        </svg>
+                    <div class="icon-container">
+                        <img src="https://img.icons8.com/emoji/96/broken-heart.png" alt="Single" class="status-icon">
                     </div>
-                    <span>Single AF</span>
+                    <span class="status-label">Single AF</span>
                 </button>
-                <button class="status-btn coupled" onclick="selectStatus('coupled')">
-                    <div class="heart-container">
-                        <svg class="whole-heart" viewBox="0 0 32 29.6">
-                            <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-                            c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-                        </svg>
+                
+                <button class="status-btn situationship" onclick="selectStatus('situationship')">
+                    <div class="icon-container">
+                        <img src="https://img.icons8.com/emoji/96/confused-face.png" alt="Situationship" class="status-icon">
                     </div>
-                    <span>In a Situationship</span>
+                    <span class="status-label">Situationship Hell</span>
                 </button>
             </div>
         </div>
     </div>
 
-    
-    <div class="scroll-container">
-        <section class="act opening" data-bg="#ff0066">
-            <div class="content">
-                <h1>This Could Have Been<br>Your Fuckin' Love Story</h1>
-                <div class="scroll-prompt">↓ Swipe down to feel things ↓</div>
+    <!-- Main Content -->
+    <div class="main-content hidden">
+        <!-- Single AF Content -->
+        <div class="content-section single-content">
+            <div class="hero">
+                <h2 class="title-slide">Welcome to Your <span class="highlight">Pathetic</span> Single Life</h2>
+                <div class="image-grid">
+                    <div class="grid-item">
+                        <img src="https://source.unsplash.com/random/600x600?lonely" alt="Alone" class="hover-zoom">
+                        <div class="overlay">You Tonight</div>
+                    </div>
+                    <div class="grid-item">
+                        <img src="https://source.unsplash.com/random/600x600?cat" alt="Pet" class="hover-zoom">
+                        <div class="overlay">Your Actual Valentine</div>
+                    </div>
+                </div>
             </div>
-        </section>
+            
+            <button class="cry-button spin" onclick="activateTraumaBot()">
+                <span>🖤 Enable Emotional Damage</span>
+            </button>
+        </div>
 
-        <section class="act meet-cute" data-bg="#ff1493">
-            <div class="content">
-                <div class="heart-msg left">"Holy shit<br>they're cute"</div>
-                <div class="heart-msg right">"Do I have<br>food in my teeth?"</div>
+        <!-- Situationship Content -->
+        <div class="content-section situationship-content">
+            <div class="hero">
+                <h2 class="title-slide">The <span class="highlight">"It's Complicated"</span> Experience</h2>
+                <div class="image-grid">
+                    <div class="grid-item">
+                        <img src="https://source.unsplash.com/random/600x600?argument" alt="Fight" class="hover-zoom">
+                        <div class="overlay">Your Last Text Exchange</div>
+                    </div>
+                    <div class="grid-item">
+                        <img src="https://source.unsplash.com/random/600x600?clock" alt="Waiting" class="hover-zoom">
+                        <div class="overlay">You Waiting for a Text Back</div>
+                    </div>
+                </div>
             </div>
-        </section>
+            
+            <button class="cry-button spin" onclick="activateTraumaBot()">
+                <span>💔 Activate Relationship Autopsy</span>
+            </button>
+        </div>
 
-        <section class="act first-fight" data-bg="#d10047">
-            <div class="content">
-                <div class="text-bubble">"You never fucking listen!"</div>
-                <div class="text-bubble right">"I'm sleeping<br>on the couch"</div>
-                <div class="resolution">...makeup sex @ 2AM</div>
-            </div>
-        </section>
-
-        <section class="act proposal" data-bg="#ff69b4">
-            <div class="content">
-                <div class="ring">💍</div>
-                <div class="proposal-text">"Will you tolerate my bullshit<br>forever?"</div>
-            </div>
-        </section>
-
-        <section class="act ending" data-bg="#ff0066">
-            <div class="content">
-                <h2>This Could Still Be You<br>You Lonely Fuck</h2>
-                <button class="cry-button" onclick="uglyCry()">Click to Simulate Human Emotion</button>
-            </div>
-        </section>
+        <!-- Trauma Bot -->
+        <div id="trauma-bot" class="hidden"></div>
     </div>
 
-    <audio id="audio" src="your-romantic-song.mp3"></audio>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

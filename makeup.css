@@ -1,204 +1,10 @@
+/* Base Styles */
 body {
     margin: 0;
+    background: #1a1a1a;
     font-family: 'Comic Sans MS', cursive;
-    overflow-x: hidden;
-    color: #fff;
-}
-
-.scroll-container {
-    scroll-snap-type: y mandatory;
-    height: 100vh;
-    overflow-y: scroll;
-}
-
-.act {
-    height: 100vh;
-    scroll-snap-align: start;
-    position: relative;
-    transition: background 1s ease;
-    overflow: hidden;
-}
-
-.content {
-    padding: 2rem;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: 1s ease;
-}
-
-.act.active .content {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.heart-msg {
-    position: absolute;
-    background: rgba(255,255,255,0.1);
-    padding: 1rem;
-    border-radius: 20px;
-    font-size: 1.5rem;
-    backdrop-filter: blur(5px);
-    animation: float 3s infinite;
-}
-
-.left { left: 10%; top: 30% }
-.right { right: 10%; top: 50% }
-
-.text-bubble {
-    position: absolute;
-    background: #fff;
-    color: #ff0066;
-    padding: 1rem;
-    border-radius: 15px;
-    font-size: 1.2rem;
-    width: 200px;
-}
-
-.text-bubble::after {
-    content: '';
-    position: absolute;
-    border: 10px solid transparent;
-    border-top-color: #fff;
-    bottom: -20px;
-    left: 20px;
-}
-
-.text-bubble.right::after {
-    left: auto;
-    right: 20px;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
-
-.cry-button {
-    background: transparent;
-    border: 3px solid #fff;
-    padding: 1rem 2rem;
-    font-size: 2rem;
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.cry-button:hover {
-    background: #ffffff22;
-    letter-spacing: 3px;
-}
-
-.scroll-prompt {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.5; transform: translateY(0); }
-    50% { opacity: 1; transform: translateY(-10px); }
-}
-
-/* Chatbot styles */
-#depression-bot {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    background: #ff0066;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.3);
-    z-index: 1000;
-    transform: translateY(20px);
-    animation: chat-entrance 0.5s ease-out forwards;
-}
-
-@keyframes chat-entrance {
-    to { transform: translateY(0); }
-}
-
-.chat-header {
-    padding: 1rem;
-    background: #d10047;
-    border-radius: 15px 15px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.close-btn {
-    background: none;
-    border: none;
     color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.chat-messages {
-    height: 400px;
-    overflow-y: auto;
-    padding: 1rem;
-}
-
-.bot-msg, .user-msg {
-    margin: 10px 0;
-    animation: msg-pop 0.3s ease-out;
-}
-
-.bot-msg .bubble {
-    background: rgba(255,255,255,0.9);
-    color: #ff0066;
-    padding: 10px;
-    border-radius: 15px 15px 15px 0;
-    margin-bottom: 5px;
-}
-
-.user-msg .bubble {
-    background: #ffffff;
-    color: #ff0066;
-    padding: 10px;
-    border-radius: 15px 15px 0 15px;
-    margin-left: auto;
-    text-align: right;
-}
-
-.reply-options {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.reply-btn {
-    background: rgba(255,255,255,0.2);
-    border: 1px solid white;
-    border-radius: 20px;
-    padding: 8px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.reply-btn:hover {
-    background: rgba(255,255,255,0.3);
-}
-
-.typing {
-    display: inline-block;
-    padding: 5px;
-}
-
-.typing::after {
-    content: '...';
-    animation: typing 1s infinite;
-}
-
-@keyframes typing {
-    0%, 100% { content: '.'; }
-    33% { content: '..'; }
-    66% { content: '...'; }
+    overflow-x: hidden;
 }
 
 /* Status Selector */
@@ -213,18 +19,12 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    transition: opacity 0.5s ease;
-}
-
-.selector-content {
-    text-align: center;
-    transform: translateY(20px);
-    opacity: 0;
-    animation: selectorEntrance 1s ease forwards 0.5s;
+    animation: selectorEntrance 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 @keyframes selectorEntrance {
-    to { transform: translateY(0); opacity: 1; }
+    0% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+    100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 }
 
 .selector-buttons {
@@ -235,91 +35,127 @@ body {
 }
 
 .status-btn {
-    background: rgba(255,255,255,0.1);
-    border: 2px solid white;
+    background: rgba(0,0,0,0.3);
+    border: none;
     padding: 2rem;
-    border-radius: 20px;
+    border-radius: 15px;
     cursor: pointer;
-    transition: 0.3s ease;
-    width: 250px;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     backdrop-filter: blur(5px);
+    width: 280px;
 }
 
 .status-btn:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    background: rgba(255,255,255,0.2);
+    transform: translateY(-10px) rotate(3deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.5);
 }
 
-.heart-container {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1rem;
+.status-icon {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
 }
 
-.broken-heart, .whole-heart {
-    fill: white;
-    width: 100%;
-    height: 100%;
-    animation: heartPulse 2s ease infinite;
+.status-label {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 0 #000;
 }
 
-.broken-heart path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawHeart 3s ease forwards;
-}
-
-@keyframes drawHeart {
-    to { stroke-dashoffset: 0; }
-}
-
-@keyframes heartPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-/* Linktree-style Animations */
+/* Main Content */
 .main-content {
     opacity: 0;
-    transform: translateY(50px);
     transition: 1s ease;
 }
 
 .main-content.active {
     opacity: 1;
-    transform: translateY(0);
 }
 
-/* Image Grid Animation */
+/* Image Grid */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(50px);
 }
 
 .grid-item {
     position: relative;
-    overflow: hidden;
     border-radius: 15px;
-    transform: scale(0.9);
-    opacity: 0;
-    transition: 0.5s ease;
-}
-
-.grid-item.animate {
-    transform: scale(1);
-    opacity: 1;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: 0.4s ease;
 }
 
 .grid-item img {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
     transition: 0.3s ease;
 }
 
-.grid-item:hover img {
-    transform: scale(1.1);
+.hover-zoom:hover {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Animations */
+.pulse {
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.05); }
+}
+
+.spin:hover {
+    animation: spin 0.8s ease;
+}
+
+@keyframes spin {
+    50% { transform: rotate(15deg); }
+}
+
+.title-slide {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: titleSlide 1s ease forwards;
+}
+
+@keyframes titleSlide {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Trauma Bot */
+#trauma-bot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: rgba(0,0,0,0.9);
+    border-radius: 15px;
+    padding: 1rem;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#trauma-bot.active {
+    transform: translateY(0);
+    opacity: 1;
 }
