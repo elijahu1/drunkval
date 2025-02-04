@@ -2,92 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Love Trauma Simulator 2024</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Mood</title>
 </head>
 <body>
-    <!-- Status Selector -->
-    <div class="status-selector">
-        <div class="selector-content">
-            <h1 class="pulse">How Fucked Are You?</h1>
-            <div class="selector-buttons">
-                <button class="status-btn single" data-status="single">
-                    <div class="icon-container">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAACdUlEQVR4nO2bwU7CQBCGZ0sLvIAnX8CbJx/Ak0/gxZP6BF58AU8+gSdfwJMnE2NijDEkJiZqYozRGGNijDExxpgYY0yMMSbGmH7pdpdtu7ttd7ttO/BP2q47M/3Y6XZ2BgAAAAAAAAAAAAAAAAAAAAAAAMB/Z9Q0zXHTNOdN0zy1jHr2aJrmommaU0TMA4UfI+Km0+lsIqJvMfS8p/0F7S+UQ4DCXxPRY9sFhCaiK9pflEOAwl+ULYCIlsshQOEv5i0gS7JkKQR0u92jEAJ6vd5hCAH9fv8ghIDBYLAfQsBwONwLIWA0Gu2GEDAej3dCCJhMJtshBEyn060QAqbT6WYIAbPZbCOEgNlsth5CwHw+XwshYLFYrIUQ8PHxsRpCwOfn50oIAd/f3yshBPz8/KyEEPD7+7scQsDf399SCAHOAojohIhOEHEVEdcQcR0RNxBxExG3EHEbEXcQcRcR9xBxHxEPEPEQEY8Q8RgRTxDxFBHPEPEcES8Q8RIRrxDxGhFvEPEWEe8Q8R4RHxDxEREfEfEJEZ8R8QURXxHxDRHfEfEDET8R8QsRvxHxBxF/EfEPEV0MAAAAAAAAAAAAAAAAAAAAAABQOP4B53jMO+Dzut0AAAAASUVORK5CYII=" 
-                             alt="Single" 
-                             class="status-icon">
-                    </div>
-                    <span class="status-label">Single AF</span>
-                </button>
-                
-                <button class="status-btn situationship" data-status="situationship">
-                    <div class="icon-container">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAACoklEQVR4nO2bS0sCURjGZ2wj6DNoF0HrVn0C6RNEmz5B0KZPEH2CqE0QbYJoE0SbIGgTRJsgaBNEmyDaBNEmiDaPv8MzMDrO3DNzZ+acB/7wL+acd37nPW8BAAAAAAAAAAAAAAAAAAAAAAAw7qTT6YVcLreaz+d3CoXCYbFYPCkWi2fFYvG8WCxeFovFq2KxeF0sFm+KxeJtsVi8KxaL98Vi8aFYLD4Wi8WnYrH4XCwWX4rF4muxWHwrFovvxWLxo1gsfhaLxa9isfhdLJZ+i6XyX6lU/isDAAAAAAAAAAAAAAAAAAAAAABjTCaTWc7lcuv5fH6rUCjsF4vFo2KxeFIsFs+LxeJlsVi8KRaLLWOxeFcsFu+LxeJDsVh8LBaLL8Vi8bVYLL4Xi8WPYrH4WSyWvkrA9w8AAAAAAAAAAAAAAAAAAAAAAGB8SSQSi5lMZi2Xy23m8/ndQqFwUCwWj4vF4mmxWDwvFouXxWLxulgs3hSLxbtisXhfLBYfi8XiU7FYfC4Wiy/FYvG1WCy+FYvF92Kx+FEslj5LwM8PAAAAAAAAAAAAAAAAAAAAAACAMSWdTi9nMpm1XC63lc/ndwqFwkGhUDgqFounxWLxrFgsXhSLxatisXhTLBbvEONDsVh8LBaLT8Vi8blYLL4Ui8XXYrH4UQJ+/wAAAAAAAAAAAAAAAAAAAAAAABhTUqnUUiaTWc1msxv5fH63UCgcFArFo0KheFwoFE8LheJFoVC8KhSKN4VC8bZQKN4XCsWHQqH4WCgUnwrF4nOhWHwpFIqvhULxrQT8/gEAAAAAAAAAAAAAAAAAAAAAADCmpFKpxUwms5LNZtfz+fxOoVDYLxQKR4VC8bhQKJ4WCsWLQqF4VSgUbwqF4m2hULwrFIr3hULxoVAoPhaKxadCsfhcKBZfCoXiW6FQfC8BP38AAAAAAAAAAAAAAAAAAAAAAACMKalUaiGTySxns9m1XC63lc/ndwqFwn6hUDgsFIrHhULxtFAoXhQKxatCoXhTKBRvC4XiXaFQvC8Uig+FQvGxUCw+FYrF50Kx+FIoFN8KheJ7Cfj9AwAAAAAAAAAAAAAAAAAAAAAAYEz5B8Xq2kHj/6CHAAAAAElFTkSuQmCC" 
-                             alt="Situationship" 
-                             class="status-icon">
-                    </div>
-                    <span class="status-label">Situationship Hell</span>
-                </button>
+    <div class="hearts"></div>
+    <div class="container">
+        <h1>Valentine's Mood</h1>
+        
+        <div class="status-selector">
+            <button class="status-btn" onclick="selectStatus('single')">Flying Solo</button>
+            <button class="status-btn" onclick="selectStatus('relationship')">Coupled Up</button>
+        </div>
+
+        <div id="single-content" class="content">
+            <h2>Self-Love Central!</h2>
+            <div class="chat-container" id="single-chat"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Chat with your hype bot..." id="single-input">
+                <button onclick="sendMessage('single')">Send</button>
+            </div>
+        </div>
+
+        <div id="relationship-content" class="content">
+            <h2>Love Birds Corner</h2>
+            <div class="chat-container" id="relationship-chat"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Chat with your romance advisor..." id="relationship-input">
+                <button onclick="sendMessage('relationship')">Send</button>
             </div>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Single AF Content -->
-        <div class="content-section single-content">
-            <div class="hero">
-                <h2 class="title-slide">Welcome to Your <span class="highlight">Pathetic</span> Single Life</h2>
-                <div class="image-grid">
-                    <div class="grid-item">
-                        <img src="https://placehold.co/600x600/ff0066/white?text=Netflix+%26+Alone" 
-                             alt="Alone" 
-                             class="hover-zoom">
-                        <div class="overlay">You Tonight</div>
-                    </div>
-                    <div class="grid-item">
-                        <img src="https://placehold.co/600x600/ff1493/white?text=Cat+Valentine" 
-                             alt="Pet" 
-                             class="hover-zoom">
-                        <div class="overlay">Your Actual Valentine</div>
-                    </div>
-                </div>
-            </div>
-            <button class="cry-button spin">
-                <span>🖤 Enable Emotional Damage</span>
-            </button>
-        </div>
-
-        <!-- Situationship Content -->
-        <div class="content-section situationship-content">
-            <div class="hero">
-                <h2 class="title-slide">The <span class="highlight">"It's Complicated"</span> Experience</h2>
-                <div class="image-grid">
-                    <div class="grid-item">
-                        <img src="https://placehold.co/600x600/d10047/white?text=Last+Text" 
-                             alt="Fight" 
-                             class="hover-zoom">
-                        <div class="overlay">Your Last Conversation</div>
-                    </div>
-                    <div class="grid-item">
-                        <img src="https://placehold.co/600x600/ff69b4/white?text=Waiting..." 
-                             alt="Waiting" 
-                             class="hover-zoom">
-                        <div class="overlay">You Right Now</div>
-                    </div>
-                </div>
-            </div>
-            <button class="cry-button spin">
-                <span>💔 Activate Relationship Autopsy</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Trauma Bot Container -->
-    <div id="trauma-bot"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="script.js"></script>
+    
 </body>
 </html>

@@ -1,104 +1,74 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Status button handlers
-    document.querySelectorAll('.status-btn').forEach(button => {
-        button.addEventListener('click', handleStatusSelection);
-    });
-
-    // Mobile viewport fix
-    const setVH = () => {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    setVH();
-    window.addEventListener('resize', setVH);
-});
-
-function handleStatusSelection(event) {
-    const status = event.currentTarget.dataset.status;
-    const selector = document.querySelector('.status-selector');
-    const mainContent = document.querySelector('.main-content');
-
-    // Show main content immediately
-    mainContent.classList.remove('hidden');
-    
-    // Animate out selector
-    gsap.to(selector, {
-        opacity: 0,
-        duration: 0.8,
-        onComplete: () => {
-            selector.remove();
-            
-            // Show selected content
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.add('hidden');
-            });
-            const activeSection = document.querySelector(`.${status}-content`);
-            activeSection.classList.remove('hidden');
-
-            // Animate content
-            gsap.from(activeSection, {
-                y: 50,
-                opacity: 0,
-                duration: 0.8,
-                ease: "back.out(1.7)"
-            });
-
-            // Add trauma button listener
-            const cryButton = activeSection.querySelector('.cry-button');
-            cryButton.addEventListener('click', activateTraumaBot);
+ // Create floating hearts background
+        function createHearts() {
+            const hearts = document.querySelector('.hearts');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                hearts.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }, 300);
         }
-    });
-}
 
-function activateTraumaBot() {
-    const status = document.querySelector('.content-section:not(.hidden)').classList.contains('single-content') ? 'single' : 'situationship';
-    
-    // Trauma messages
-    const messages = {
-        single: [
-            "😭 Last date: Before TikTok existed",
-            "💌 Most recent text: 'Your Uber Eats is here'",
-            "🍷 Nights out vs. nights in: 0-31",
-            "📸 Gallery: 87% memes, 13% cat"
-        ],
-        situationship: [
-            "🔥 Last 'I love you': Never existed",
-            "💬 Unanswered texts: Stacking up",
-            "⌛ Days since clarity: ∞",
-            "💔 Mutual confusion level: 110%"
-        ]
-    };
+        // Chat responses
+        const singleResponses = [
+            "You're a whole awesome package! Who needs a plus one?",
+            "Treat yourself to something nice today. You deserve it!",
+            "Being single means more pizza for you!",
+            "Your relationship status doesn't define your worth!",
+            "Time to plan that solo adventure you've been dreaming of!",
+        ];
 
-    // Create trauma bot
-    const traumaBot = document.createElement('div');
-    traumaBot.id = 'trauma-bot';
-    traumaBot.innerHTML = `
-        <div class="bot-header">
-            <h3>💔 Trauma Bot 3000</h3>
-            <button class="close-btn">×</button>
-        </div>
-        <div class="bot-content">
-            <ul>
-                ${messages[status].map(msg => `<li>${msg}</li>`).join('')}
-            </ul>
-        </div>
-    `;
+        const relationshipResponses = [
+            "Aww, you two are relationship goals!",
+            "Have you planned something special for your partner?",
+            "Communication is key - keep that love flowing!",
+            "Time for a cute date night!",
+            "Remember to appreciate the little things about each other.",
+        ];
 
-    // Add close functionality
-    traumaBot.querySelector('.close-btn').addEventListener('click', () => {
-        gsap.to(traumaBot, {
-            opacity: 0,
-            y: 20,
-            duration: 0.3,
-            onComplete: () => traumaBot.remove()
+        function selectStatus(status) {
+            document.getElementById('single-content').style.display = 'none';
+            document.getElementById('relationship-content').style.display = 'none';
+            document.getElementById(`${status}-content`).style.display = 'block';
+        }
+
+        function sendMessage(type) {
+            const input = document.getElementById(`${type}-input`);
+            const chatContainer = document.getElementById(`${type}-chat`);
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message
+            const userMsg = document.createElement('div');
+            userMsg.classList.add('message', 'user-message');
+            userMsg.textContent = message;
+            chatContainer.appendChild(userMsg);
+
+            // Add bot response
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.classList.add('message', 'bot-message');
+                const responses = type === 'single' ? singleResponses : relationshipResponses;
+                botMsg.textContent = responses[Math.floor(Math.random() * responses.length)];
+                chatContainer.appendChild(botMsg);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+
+            input.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Initialize
+        createHearts();
+
+        // Add enter key support for chat
+        document.getElementById('single-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage('single');
         });
-    });
-
-    document.body.appendChild(traumaBot);
-    gsap.from(traumaBot, {
-        opacity: 0,
-        y: 100,
-        duration: 0.5,
-        ease: "power2.out"
-    });
-}
+        document.getElementById('relationship-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage('relationship');
+        });
